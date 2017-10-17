@@ -3,7 +3,6 @@ var request = require('request');
 
 module.exports = commands = {
 	date: function(pipeIn, myArgs){
-		//process.stdout.write(Date());
 		var output = Date();
 		done(output);
 	},

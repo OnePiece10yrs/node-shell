@@ -16,14 +16,14 @@ process.stdin.on('data', function (data) {
   cmd = cmd.split(' ')[0];
   var input = '';
 
-  var cmdString = data.toString().trim();
-  var cmdList = cmdString.split(/\s*\|\s*/g);
-  process.stdout.write("cmdList = " + cmdList);
-
+  //for piping
+  // var cmdString = data.toString().trim();
+  // var cmdList = cmdString.split(/\s*\|\s*/g);
+  // process.stdout.write("cmdList = " + cmdList);
 
 
   process.stdout.write('You typed: ' + cmd + '\n');
-  process.stdout.write("op=" + opt);
+
 
 
   //test case: number of commands entered
