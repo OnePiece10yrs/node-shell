@@ -1,54 +1,40 @@
-// const readline = require('readline');
- const fs = require('fs');
- const exec = require('child_process').exec;
-
 var commands = require('./commands');
-// var userCommand = 'pwd';
-// commands[userCommand]();
-
+// Output a prompt
 process.stdout.write('prompt > ');
-//process.stdout.write('argv: '  + process.argv);
 
-process.stdin.on('data', function(inData){
-  var cmd = inData.toString().trim();
-  var cmdList = cmdString.split(/\s*\|\s*/g)
+// The stdin 'data' event fires after a user types in a line
 
-  commands[cmd]();
+// eventEmitter related to stdin.On doc source:
+//https://nodejs.org/api/events.html#events_emitter_on_eventname_listener
+//args: (eventName, callBack)
 
-})
+process.stdin.on('data', function (data) {
+  var cmd = data.toString().trim(); // remove the newline
 
+  //parse input into arrays, org
+  var opt = cmd.split(' ')[1];
+  cmd = cmd.split(' ')[0];
+  var input = '';
 
-
-// function sh(cmd) {
-//   return new Promise(function (resolve, reject) {
-//     exec(cmd, (err, stdout, stderr) => {
-//       if (err) {
-//         reject(err);
-//       } else {
-//         resolve({ stdout, stderr });
-//       }
-//     });
-//   });
-// }
-
-// console.log(" hi");
-// console.log(process);
-// console.log('++++++\n');
-// console.log(Object.keys(process));
-
-// const url =  readline.createInterface({
-//   input: process.stdin,
-//   out: process.stdou
-// })
+  var cmdString = data.toString().trim();
+  var cmdList = cmdString.split(/\s*\|\s*/g);
+  process.stdout.write("cmdList = " + cmdList);
 
 
-// rl.on('line', line=> {
-//   fs.readFile(line, (err,data)=>{
-//     if(err){
 
-//     }
-//   })
+  process.stdout.write('You typed: ' + cmd + '\n');
+  process.stdout.write("op=" + opt);
 
-//   process.stdout.write(fs.accessSync)
-// })
-// process.stdout.write('hi again');
+
+  //test case: number of commands entered
+  // process argv holds all input in array. check argv.length will return
+  // num of command entered
+  //process.stdout.write("num of args=" + process.argv.length);
+
+commands[cmd](input, opt);
+
+  //process.stdout.write(commands(cmd));
+  // process.stdout.write('test');
+  // process.stdout.write(process.stdout.read());
+  // commands[cmd]();
+});
